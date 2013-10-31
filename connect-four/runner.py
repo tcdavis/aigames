@@ -2,10 +2,14 @@
 
 import argparse
 import subprocess
+import sys
 from collections import defaultdict
 
 PIPE = subprocess.PIPE
 
+
+def printi(str_):
+    sys.stderr.write("%s\n" % str_)
 
 class Player(object):
 
@@ -55,12 +59,13 @@ class Game(object):
         # insert move into grid_rows
         self.grid_rows[row_idx][col_idx] = len(self.moves) % 2
         self.moves.append(col_idx)
+        return self
 
     def print_grid(self):
-        print('-' * (Game.COLUMNS * 2 + 3))
+        printi('-' * (Game.COLUMNS * 2 + 3))
         for row in self.grid_rows[::-1]:
-            print('| %s |' % ' '.join([str(cell if cell is not None else ' ') for cell in row]))
-        print('-' * (Game.COLUMNS * 2 + 3))
+            printi('| %s |' % ' '.join([str(cell if cell is not None else ' ') for cell in row]))
+        printi('-' * (Game.COLUMNS * 2 + 3))
 
     def is_won(self):
         return (self.any_columns_won() or self.any_rows_won() or
