@@ -7,7 +7,6 @@ from copy import deepcopy as copy
 range1 = [3,2,4,1,5,0,6]
 p0wins = 100000000
 p1wins = -100000000
-
 null_win = [None for i in range(4)]
 
 import operator as op
@@ -285,7 +284,6 @@ def alphabeta(game, depth, a, b, player_is_zero, heuristic):
 
         return b
 
-
 def call_alphabeta(game, depth, a, b, player_is_zero, heuristic, moves=None):
     if moves is None:
         moves = game.valid_moves
@@ -343,7 +341,7 @@ def simple(board):
     score = 0
     _ = board.grid_columns
     for val, line in enumerate(_):
-        s = (map(lambda x: val if x==0 else 0, line) + 
+        s = (map(lambda x: val if x==0 else 0, line) +
              map(lambda x: -val if x==1 else 0, line))
         if s:
             # print line, s, sum(s)
@@ -373,7 +371,7 @@ def potential(base):
     return h
 
 def player(depth, heuristic):
-    game = OldGame()
+   game = OldGame()
     player_is_zero = False
     while not sys.stdin.closed:
         line = sys.stdin.readline()

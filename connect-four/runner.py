@@ -63,6 +63,8 @@ class MockPlayer(object):
     def print_moves(self):
         print('%s\t%s' % (self.cmd, ' '.join([str(move) for move in self.moved])))
 
+def itersafe(n):
+    return n if n else None
 
 class Game(object):
 
@@ -97,6 +99,21 @@ class Game(object):
         print('-' * (Game.COLUMNS * 2 + 3))
 
     def is_won(self):
+        # _ = self.grid_rows + self.grid_columns + self.diags
+        # for line in _:
+        #     if len(line) < 4:
+        #         continue
+        #     zeros = [1 if cell == 0 else 0 for cell in line]
+        #     ones = [1 if cell == 1 else 0 for cell in line]
+
+        #     zeros = map(lambda *args: sum(args), *[zeros[i:itersafe(-4 + i)] for i in range(4)])
+        #     ones = map(lambda *args: sum(args), *[ones[i:itersafe(-4 + i)] for i in range(4)])
+
+
+        #     for i in range(len(zeros)):
+        #         if zeros[i] == 4 or ones[i] == 4:
+        #             return True
+        # return False
         return (self.any_columns_won() or self.any_rows_won() or
             self.any_diags_won())
 
